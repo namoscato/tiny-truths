@@ -1,0 +1,104 @@
+.header {
+  --feature-image-margin-bottom: -4.375rem;
+
+  align-items: center;
+  background-color: var(--color-green);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin-bottom: calc(-1 * var(--feature-image-margin-bottom));
+  padding-top: 1rem;
+}
+
+.images {
+  text-align: center;
+
+  img {
+    display: inline-block;
+    max-width: 100%;
+  }
+}
+
+.logo {
+  margin: 1rem;
+}
+
+.featureImage {
+  margin-bottom: var(--feature-image-margin-bottom);
+  max-height: 33rem;
+  pointer-events: none;
+  position: relative;
+  width: auto;
+  z-index: 1;
+}
+
+.wavesurfer {
+  cursor: col-resize;
+  z-index: 0;
+  width: 100%;
+}
+
+.content {
+  margin: 0 auto;
+  max-width: var(--max-width);
+  padding: 0 1rem 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.controls {
+  align-items: flex-end;
+  display: flex;
+}
+
+.time {
+  color: var(--color-gray);
+  margin-left: 1rem;
+}
+
+.timeStarted {
+  color: var(--color-black);
+}
+
+.timeActive {
+  color: var(--color-red);
+}
+
+@media screen and (min-width: 64rem) {
+  .header {
+    background: var(--color-green) url(./images/waveform.png) no-repeat right
+      top / 786px 353px;
+    margin-bottom: 0;
+    min-height: 85vh;
+    padding-top: 3rem;
+  }
+
+  .images {
+    display: flex;
+    justify-content: space-between;
+    width: var(--max-width);
+
+    > img {
+      align-self: flex-start;
+    }
+  }
+
+  .featureImage {
+    max-height: 676px;
+  }
+
+  .wavesurfer {
+    --margin-left: calc((100vw - var(--max-width)) / 2);
+    --content-width: calc(var(--max-width) - 472px + 1rem);
+    align-self: flex-start;
+    width: calc(var(--margin-left) + var(--content-width));
+  }
+
+  .content > p {
+    max-width: 29rem;
+  }
+
+  .controls {
+    margin-top: -2rem;
+  }
+}

@@ -1,13 +1,38 @@
+import episode1Waveform from "../audio/episode1.json";
+import episode1Url from "../audio/episode1.webm?url";
+import { Home } from "../home/Home";
 import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "Tiny Truths" },
+    { name: "description", content: "An Amoscato podcast" },
+    {
+      property: "og:image",
+      content: "https://podcast.tesinandnick.com/opengraph-image.jpg",
+    },
+    {
+      property: "og:image:width",
+      content: "1200",
+    },
+    {
+      property: "og:image:height",
+      content: "630",
+    },
+    {
+      property: "og:image:type",
+      content: "image/jpeg",
+    },
   ];
 }
 
-export default function Home() {
-  return <Welcome />;
+export async function loader({}: Route.LoaderArgs) {
+  return {
+    url: episode1Url,
+    peaks: [episode1Waveform.data],
+  };
+}
+
+export default function HomeRoute({ loaderData }: Route.ComponentProps) {
+  return <Home audio={loaderData} />;
 }
