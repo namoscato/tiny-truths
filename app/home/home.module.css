@@ -64,6 +64,10 @@
   color: var(--color-red);
 }
 
+.subtitle {
+  color: var(--color-gray);
+}
+
 @media screen and (min-width: 64rem) {
   .header {
     background: var(--color-green) url(./images/waveform.png) no-repeat right
