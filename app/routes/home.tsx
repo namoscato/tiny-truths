@@ -7,6 +7,22 @@ export function meta({}: Route.MetaArgs) {
   return [
     { title: "Tiny Truths" },
     { name: "description", content: "An Amoscato Podcast" },
+    {
+      property: "og:image",
+      content: "https://podcast.tesinandnick.com/opengraph-image.jpg",
+    },
+    {
+      property: "og:image:width",
+      content: "1200",
+    },
+    {
+      property: "og:image:height",
+      content: "630",
+    },
+    {
+      property: "og:image:type",
+      content: "image/jpeg",
+    },
   ];
 }
 
