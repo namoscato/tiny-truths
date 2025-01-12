@@ -6,7 +6,7 @@ import type { Route } from "./+types/home";
 export function meta({}: Route.MetaArgs) {
   return [
     { title: "Tiny Truths" },
-    { name: "description", content: "An Amoscato Podcast" },
+    { name: "description", content: "An Amoscato podcast" },
     {
       property: "og:image",
       content: "https://podcast.tesinandnick.com/opengraph-image.jpg",

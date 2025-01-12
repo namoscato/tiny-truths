@@ -1,3 +1,3 @@
 # Tiny Truths
 
-An Amoscato Podcast
+An Amoscato podcast
