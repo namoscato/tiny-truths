@@ -74,6 +74,7 @@ export const Home = ({ audio }: Props) => {
           reflects on the Christmas season, and shares some words of wisdom for
           the New Year.
         </p>
+        <p className={styles.subtitle}>Recorded December 30, 2024</p>
       </main>
     </>
   );
