@@ -1,12 +1,32 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url(sanitize.css);
 
-html,
 body {
-  @apply bg-white dark:bg-gray-950;
+  --color-black: #030303;
+  --color-gray: #8c8b8b;
+  --color-white: #fcfafa;
+  --color-green: #0bde99;
+  --color-red: #de350b;
+  --max-width: 29rem;
 
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
+  background-color: var(--color-white);
+  color: var(--color-black);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+h1,
+h2 {
+  font-family: "DM Serif Text", serif;
+  font-style: normal;
+  font-weight: 400;
+}
+
+h2 {
+  font-size: 2rem;
+  margin: 0.5em 0;
+}
+
+@media screen and (min-width: 64rem) {
+  body {
+    --max-width: 60rem;
   }
 }
