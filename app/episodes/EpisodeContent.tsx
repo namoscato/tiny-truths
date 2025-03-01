@@ -6,7 +6,6 @@ import type { EpisodeConfig } from "~/episodes/utils/getEpisodeConfigs";
 import { FormattedTime } from "./FormattedTime";
 import { PlayButton } from "./PlayButton";
 import styles from "./episodeContent.module.css";
-import gioImg from "./images/gio.png";
 import logoImg from "./images/logo.png";
 
 interface Props {
@@ -51,8 +50,8 @@ export const EpisodeContent = ({ episode, logoLink }: Props) => {
             )}
           </div>
           <img
-            src={gioImg}
-            alt="Giovanni with headphones"
+            src={episode.image.url}
+            alt={episode.image.alt}
             width={475}
             className={styles.featureImage}
           />

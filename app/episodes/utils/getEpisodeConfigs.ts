@@ -1,14 +1,22 @@
 import { access } from "fs/promises";
 import { join } from "path";
 import { getAudioPeaks } from "../audio/getAudioPeaks";
-import { episodes, type BaseEpisodeConfig } from "./episodes";
+import { episodeConfigs, type EpisodeConfigBase } from "./episodeConfigs";
+import { loadExif } from "./loadExif";
 import type { Audio } from "./types";
 
-export interface EpisodeConfig extends BaseEpisodeConfig {
+export interface EpisodeConfig extends EpisodeConfigBase {
   number: number;
   title: string;
   audio: Audio;
-  // TODO image
+  image: EpisodeConfigImage;
+}
+
+interface EpisodeConfigImage {
+  url: string;
+  alt: string;
+  width: number;
+  height: number;
 }
 
 /**
@@ -17,17 +25,15 @@ export interface EpisodeConfig extends BaseEpisodeConfig {
 export async function getEpisodeConfigs(): Promise<EpisodeConfig[]> {
   const configs: EpisodeConfig[] = [];
 
-  for (const [index, episode] of episodes.entries()) {
+  for (const [index, episode] of episodeConfigs.entries()) {
     const number = 1 + index;
-
-    const title = titleFromNumber(number);
-    const audio = await audioFromNumber(number);
 
     configs.push({
       ...episode,
       number,
-      title,
-      audio,
+      title: titleFromNumber(number),
+      audio: await audioFromNumber(number),
+      image: await imageFromNumber(number),
     });
   }
 
@@ -50,15 +56,29 @@ async function audioFromNumber(number: number): Promise<Audio> {
 async function audioUrlFromNumber(number: number): Promise<string> {
   const url = `/audio/episode${number}.webm`;
 
-  await assertPublicFileExists(url);
+  // assert file exists
+  await access(getPublicURL(url));
 
   return url;
 }
 
-async function assertPublicFileExists(path: string) {
-  const publicDir = import.meta.dirname.endsWith("/build/server")
+async function imageFromNumber(number: number): Promise<EpisodeConfigImage> {
+  const url = `/images/episode${number}.png`;
+
+  const { width, height, description } = await loadExif(getPublicURL(url));
+
+  return {
+    url,
+    alt: description ?? `Episode ${number} image`,
+    width,
+    height,
+  };
+}
+
+function getPublicURL(path: string): URL {
+  const relativeDir = import.meta.dirname.endsWith("/build/server")
     ? "../client"
     : "../../../public";
 
-  await access(new URL(join(publicDir, path), import.meta.url));
+  return new URL(join(relativeDir, path), import.meta.url);
 }
