@@ -29,9 +29,13 @@ export function meta({ data }: Route.MetaArgs) {
 }
 
 export async function loader({}: Route.LoaderArgs): Promise<EpisodeConfig> {
-  const episodes = await getEpisodeConfigs();
+  const episode = (await getEpisodeConfigs())[0];
 
-  return episodes[0];
+  if (!episode) {
+    throw new Response("Not Found", { status: 404 });
+  }
+
+  return episode;
 }
 
 export default function HomeRoute({ loaderData }: Route.ComponentProps) {

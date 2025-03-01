@@ -1,4 +1,6 @@
-import { access, readFile } from "fs/promises";
+import { access } from "fs/promises";
+import { join } from "path";
+import { getAudioPeaks } from "../audio/getAudioPeaks";
 import { episodes, type BaseEpisodeConfig } from "./episodes";
 import type { Audio } from "./types";
 
@@ -40,7 +42,7 @@ function titleFromNumber(number: number): string {
 
 async function audioFromNumber(number: number): Promise<Audio> {
   const url = await audioUrlFromNumber(number);
-  const peaks = await audioPeaksFromNumber(number);
+  const peaks = getAudioPeaks(number);
 
   return { url, peaks };
 }
@@ -48,17 +50,15 @@ async function audioFromNumber(number: number): Promise<Audio> {
 async function audioUrlFromNumber(number: number): Promise<string> {
   const url = `/audio/episode${number}.webm`;
 
-  // assert file exists
-  await access(new URL(`../../../public${url}`, import.meta.url));
+  await assertPublicFileExists(url);
 
   return url;
 }
 
-async function audioPeaksFromNumber(number: number): Promise<number[][]> {
-  const buffer = await readFile(
-    new URL(`../audio/episode${number}.json`, import.meta.url),
-  );
-  const waveform = JSON.parse(buffer.toString());
+async function assertPublicFileExists(path: string) {
+  const publicDir = import.meta.dirname.endsWith("/build/server")
+    ? "../client"
+    : "../../../public";
 
-  return [waveform.data];
+  await access(new URL(join(publicDir, path), import.meta.url));
 }

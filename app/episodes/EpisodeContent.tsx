@@ -69,8 +69,8 @@ export const EpisodeContent = ({ episode, logoLink }: Props) => {
           <div className={styles.time}>
             <span
               className={clsx({
-                [styles.timeStarted]: currentTime,
-                [styles.timeActive]: isPlaying,
+                [String(styles.timeStarted)]: currentTime,
+                [String(styles.timeActive)]: isPlaying,
               })}
             >
               <FormattedTime>{currentTime}</FormattedTime>

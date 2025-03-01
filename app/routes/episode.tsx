@@ -34,7 +34,7 @@ export async function loader({
     ({ number }) => number === Number(params.number),
   );
 
-  if (-1 === episodeIndex) {
+  if (!episodes[episodeIndex]) {
     throw new Response("Not Found", { status: 404 });
   }
 
