@@ -9,4 +9,8 @@ export const episodes: BaseEpisodeConfig[] = [
     summary:
       "Giovanni introduces himself, talks about some of his favorite things, reflects on the Christmas season, and shares some words of wisdom for the New Year.",
   },
+  {
+    date: new Date("2025-02-27"),
+    summary: "TODO",
+  },
 ];
