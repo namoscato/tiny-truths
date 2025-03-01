@@ -3,10 +3,12 @@
 body {
   --color-black: #030303;
   --color-gray: #8c8b8b;
+  --color-gray-light: #d7d6d6;
   --color-white: #fcfafa;
   --color-green: #0bde99;
   --color-red: #de350b;
-  --max-width: 29rem;
+  --max-width: var(--max-width-small);
+  --max-width-small: 29rem;
 
   background-color: var(--color-white);
   color: var(--color-black);

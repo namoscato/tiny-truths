@@ -1,0 +1,24 @@
+.link,
+.disabled {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.35rem;
+}
+
+.link {
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    color: var(--color-red);
+  }
+}
+
+.disabled {
+  background: none;
+  border: none;
+  color: var(--color-gray);
+  font: inherit;
+  margin: 0;
+  padding: 0;
+}
