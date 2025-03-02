@@ -23,6 +23,10 @@
   margin: 1rem;
 }
 
+.logoLink {
+  display: inline-block;
+}
+
 .featureImage {
   margin-bottom: var(--feature-image-margin-bottom);
   max-height: 33rem;
@@ -39,9 +43,7 @@
 }
 
 .content {
-  margin: 0 auto;
-  max-width: var(--max-width);
-  padding: 0 1rem 2rem;
+  padding: 0 1rem;
   position: relative;
   z-index: 1;
 }
@@ -64,8 +66,12 @@
   color: var(--color-red);
 }
 
-.subtitle {
-  color: var(--color-gray);
+@media screen and (min-width: 31rem) {
+  .content {
+    margin: 0 auto;
+    max-width: var(--max-width);
+    padding: 0;
+  }
 }
 
 @media screen and (min-width: 64rem) {
@@ -85,6 +91,10 @@
     > img {
       align-self: flex-start;
     }
+  }
+
+  .logo {
+    margin: 0;
   }
 
   .featureImage {

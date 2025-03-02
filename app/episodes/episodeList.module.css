@@ -1,0 +1,46 @@
+.header {
+  background: var(--color-green) url(./images/waveform.png) no-repeat right
+    top / 786px 353px;
+  padding: 10rem 0 5rem;
+  text-align: center;
+}
+
+.logo {
+  margin: 1rem;
+
+  img {
+    display: inline-block;
+    max-width: 100%;
+  }
+}
+
+.logoLink {
+  display: inline-block;
+}
+
+.list {
+  list-style-type: none;
+  margin: 0 auto;
+  max-width: var(--max-width-small);
+  padding: 0 1rem 2rem;
+
+  > li {
+    border-bottom: 1px solid var(--color-gray-light);
+    margin-top: 2rem;
+    padding-bottom: 1.5rem;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+.episode {
+  color: inherit;
+  display: block;
+  text-decoration: none;
+
+  &:hover h2 {
+    color: var(--color-red);
+  }
+}

@@ -1,0 +1,31 @@
+.root {
+  margin: 2rem auto 0;
+  padding: 0 1rem;
+  max-width: var(--max-width);
+}
+
+.content {
+  border-top: 1px solid var(--color-gray-light);
+  display: flex;
+  justify-content: space-between;
+  max-width: var(--max-width-small);
+  padding: 1.5rem 0 3rem;
+}
+
+.button {
+  align-items: center;
+  color: inherit;
+  display: inline-flex;
+  gap: 0.35rem;
+  text-decoration: none;
+
+  &:hover {
+    color: var(--color-red);
+  }
+}
+
+@media screen and (min-width: 31rem) {
+  .root {
+    padding: 0;
+  }
+}
