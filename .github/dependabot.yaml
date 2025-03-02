@@ -1,0 +1,32 @@
+version: 2
+
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    groups:
+      react:
+        patterns:
+          - "react"
+          - "react-dom"
+          - "@types/react"
+          - "@types/react-dom"
+      react-router:
+        patterns:
+          - "@react-router/*"
+          - "react-router"
+      postcss:
+        patterns:
+          - "autoprefixer"
+          - "postcss"
+          - "postcss-*"
+      vite:
+        patterns:
+          - "vite"
+          - "vite-*"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
