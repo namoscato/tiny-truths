@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { Link } from "react-router";
-import styles from "./button.module.css";
+import styles from "./buttonLink.module.css";
 
 interface Props {
   /** disabled when `undefined` */

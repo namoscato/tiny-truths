@@ -108,10 +108,8 @@
     width: calc(var(--margin-left) + var(--content-width));
   }
 
-  .content {
-    > p {
-      max-width: 29rem;
-    }
+  .content > p {
+    max-width: 29rem;
   }
 
   .controls {
