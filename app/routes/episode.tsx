@@ -1,13 +1,13 @@
 import { Episode, type EpisodeProps } from "../episodes/Episode";
 import { getEpisodeConfigs } from "../episodes/utils/getEpisodeConfigs";
 import type { Route } from "../routes/+types/episode";
-import { createPageTitle } from "./utils/createPageTitle";
+import { createPageTitle, DEFAULT_TITLE } from "./utils/createPageTitle";
 import { createRouteMeta } from "./utils/createRouteMeta";
 
 export function meta({ data }: Route.MetaArgs): Route.MetaDescriptors {
   return createRouteMeta({
-    title: createPageTitle(data.episode.title),
-    description: data.episode.summary,
+    title: data ? createPageTitle(data.episode.title) : DEFAULT_TITLE,
+    description: data?.episode.summary,
   });
 }
 
