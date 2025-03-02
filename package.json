@@ -31,7 +31,7 @@
     "exifreader": "^4.26.1",
     "postcss": "^8.4.49",
     "postcss-nesting": "^13.0.1",
-    "prettier": "3.4.2",
+    "prettier": "3.5.2",
     "typescript": "^5.8.2",
     "vite": "^5.4.14",
     "vite-tsconfig-paths": "^5.1.4"
