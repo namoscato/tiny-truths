@@ -66,10 +66,6 @@
   color: var(--color-red);
 }
 
-.subtitle {
-  color: var(--color-gray);
-}
-
 @media screen and (min-width: 31rem) {
   .content {
     margin: 0 auto;

@@ -3,10 +3,11 @@ import clsx from "clsx";
 import { useRef } from "react";
 import { Link } from "react-router";
 import type { EpisodeConfig } from "~/episodes/utils/getEpisodeConfigs";
-import { FormattedTime } from "./FormattedTime";
-import { PlayButton } from "./PlayButton";
 import styles from "./episodeContent.module.css";
+import { FormattedTime } from "./FormattedTime";
 import logoImg from "./images/logo.png";
+import { PlayButton } from "./PlayButton";
+import { RecordedDate } from "./RecordedDate";
 
 interface Props {
   episode: EpisodeConfig;
@@ -78,18 +79,9 @@ export const EpisodeContent = ({ episode, logoLink }: Props) => {
             <FormattedTime>{wavesurfer?.getDuration()}</FormattedTime>
           </div>
         </div>
-        {/* TODO: consolidate with EpisodeList */}
         <h2>{episode.title}</h2>
         <p>{episode.summary}</p>
-        <p className={styles.subtitle}>
-          Recorded{" "}
-          {episode.date.toLocaleDateString("en-US", {
-            month: "long",
-            day: "numeric",
-            year: "numeric",
-            timeZone: "UTC",
-          })}
-        </p>
+        <RecordedDate date={episode.date} />
       </main>
     </>
   );

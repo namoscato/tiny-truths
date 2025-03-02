@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import styles from "./episodeList.module.css";
 import logoImg from "./images/logo.png";
+import { RecordedDate } from "./RecordedDate";
 import type { EpisodeConfig } from "./utils/getEpisodeConfigs";
 
 interface Props {
@@ -22,18 +23,9 @@ export const EpisodeList = ({ episodes }: Props) => {
         {episodes.map((episode) => (
           <li key={episode.number}>
             <Link className={styles.episode} to={`/episodes/${episode.number}`}>
-              {/* TODO: consolidate with EpisodeContent */}
               <h2>{episode.title}</h2>
               <p>{episode.summary}</p>
-              <p className={styles.subtitle}>
-                Recorded{" "}
-                {episode.date.toLocaleDateString("en-US", {
-                  month: "long",
-                  day: "numeric",
-                  year: "numeric",
-                  timeZone: "UTC",
-                })}
-              </p>
+              <RecordedDate date={episode.date} />
             </Link>
           </li>
         ))}

@@ -1,28 +1,14 @@
 import { Episode, type EpisodeProps } from "../episodes/Episode";
 import { getEpisodeConfigs } from "../episodes/utils/getEpisodeConfigs";
 import type { Route } from "../routes/+types/episode";
+import { createPageTitle } from "./utils/createPageTitle";
+import { createRouteMeta } from "./utils/createRouteMeta";
 
-export function meta({ data }: Route.MetaArgs) {
-  return [
-    { title: "Tiny Truths" },
-    { name: "description", content: "An Amoscato podcast" },
-    // {
-    //   property: "og:image",
-    //   content: "https://podcast.tesinandnick.com/opengraph-image.jpg",
-    // },
-    // {
-    //   property: "og:image:width",
-    //   content: "1200",
-    // },
-    // {
-    //   property: "og:image:height",
-    //   content: "630",
-    // },
-    // {
-    //   property: "og:image:type",
-    //   content: "image/jpeg",
-    // },
-  ];
+export function meta({ data }: Route.MetaArgs): Route.MetaDescriptors {
+  return createRouteMeta({
+    title: createPageTitle(data.episode.title),
+    description: data.episode.summary,
+  });
 }
 
 export async function loader({
