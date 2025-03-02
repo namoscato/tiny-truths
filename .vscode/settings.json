@@ -1,4 +1,11 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "cSpell.words": ["Amoscato", "Exif", "exifreader", "Wavesurfer"]
+  "cSpell.words": [
+    "Amoscato",
+    "autoprefixer",
+    "Exif",
+    "exifreader",
+    "vite",
+    "Wavesurfer"
+  ]
 }
