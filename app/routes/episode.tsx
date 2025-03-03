@@ -8,6 +8,7 @@ export function meta({ data }: Route.MetaArgs): Route.MetaDescriptors {
   return createRouteMeta({
     title: data ? createPageTitle(data.episode.title) : DEFAULT_TITLE,
     description: data?.episode.summary,
+    openGraphImage: data?.episode.openGraphImage,
   });
 }
 

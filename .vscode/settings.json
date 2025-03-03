@@ -6,6 +6,7 @@
     "Exif",
     "exifreader",
     "isbot",
+    "opengraph",
     "vite",
     "Wavesurfer"
   ]

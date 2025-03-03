@@ -9,12 +9,13 @@ export interface EpisodeConfig extends EpisodeConfigBase {
   number: number;
   title: string;
   audio: Audio;
-  image: EpisodeConfigImage;
+  featureImage: EpisodeConfigImage;
+  openGraphImage: EpisodeConfigImage;
 }
 
-interface EpisodeConfigImage {
+export interface EpisodeConfigImage {
   url: string;
-  alt: string;
+  description?: string;
   width: number;
   height: number;
 }
@@ -33,7 +34,8 @@ export async function getEpisodeConfigs(): Promise<EpisodeConfig[]> {
       number,
       title: titleFromNumber(number),
       audio: await audioFromNumber(number),
-      image: await imageFromNumber(number),
+      featureImage: await imageFromName(`episode${number}.png`),
+      openGraphImage: await imageFromName(`episode${number}-opengraph.jpg`),
     });
   }
 
@@ -54,7 +56,7 @@ async function audioFromNumber(number: number): Promise<Audio> {
 }
 
 async function audioUrlFromNumber(number: number): Promise<string> {
-  const url = `/audio/episode${number}.webm`;
+  const url = `/episodes/audio/episode${number}.webm`;
 
   // assert file exists
   await access(getPublicURL(url));
@@ -62,17 +64,12 @@ async function audioUrlFromNumber(number: number): Promise<string> {
   return url;
 }
 
-async function imageFromNumber(number: number): Promise<EpisodeConfigImage> {
-  const url = `/images/episode${number}.png`;
+async function imageFromName(name: string): Promise<EpisodeConfigImage> {
+  const url = `/episodes/images/${name}`;
 
-  const { width, height, description } = await loadExif(getPublicURL(url));
+  const image = await loadExif(getPublicURL(url));
 
-  return {
-    url,
-    alt: description ?? `Episode ${number} image`,
-    width,
-    height,
-  };
+  return { ...image, url };
 }
 
 function getPublicURL(path: string): URL {

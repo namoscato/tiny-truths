@@ -38,7 +38,8 @@ export const EpisodeContent = ({ episode, logoLink }: Props) => {
 
   const headerStyle = {
     ["--feature-image-max-height" as string]: `${Math.round(
-      (episode.image.height / episode.image.width) * FEATURE_IMAGE_MAX_WIDTH,
+      (episode.featureImage.height / episode.featureImage.width) *
+        FEATURE_IMAGE_MAX_WIDTH,
     )}px`,
   } satisfies CSSProperties;
 
@@ -60,8 +61,8 @@ export const EpisodeContent = ({ episode, logoLink }: Props) => {
           </div>
           <div className={styles.imageContainer}>
             <img
-              src={episode.image.url}
-              alt={episode.image.alt}
+              src={episode.featureImage.url}
+              alt={episode.featureImage.description ?? `${episode.title} image`}
               className={styles.featureImage}
             />
           </div>

@@ -30,14 +30,16 @@ Amoscato podcast website built with [React Router](https://reactrouter.com/).
 
 1. Add JSON data to [`episodePeaks` array](./app/episodes/audio/getAudioPeaks.ts)
 
-1. Add WebM to [./public/audio/](./public/audio/), converted from MP3 via VLC
+1. Add WebM to [./public/episodes/audio/](./public/episodes/audio/), converted from MP3 via VLC
 
-1. Add [compressed](https://tinypng.com/) image to [./public/images/](./public/images/) directory
+1. Add [compressed](https://tinypng.com/) feature image to [./public/episodes/images/](./public/episodes/images/) directory
 
-1. Set image description metadata:
+1. Set feature image description metadata:
 
    ```bash
-   exiftool -overwrite_original -ImageDescription="Giovanni with headphones" public/images/episode1.png
+   exiftool -overwrite_original -ImageDescription="Giovanni with headphones" public/episodes/images/episode1.png
    ```
+
+1. Add Open Graph image to [./public/episodes/images/](./public/episodes/images/) directory
 
 1. Add entry to [`episodeConfigs` array](./app/episodes/utils/episodeConfigs.ts)

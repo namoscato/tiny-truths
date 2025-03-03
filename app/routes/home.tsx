@@ -7,8 +7,11 @@ import type { Route } from "../routes/+types/home";
 import { DEFAULT_TITLE } from "./utils/createPageTitle";
 import { createRouteMeta } from "./utils/createRouteMeta";
 
-export function meta({}: Route.MetaArgs): Route.MetaDescriptors {
-  return createRouteMeta({ title: DEFAULT_TITLE });
+export function meta({ data }: Route.MetaArgs): Route.MetaDescriptors {
+  return createRouteMeta({
+    title: DEFAULT_TITLE,
+    openGraphImage: data.openGraphImage,
+  });
 }
 
 export async function loader({}: Route.LoaderArgs): Promise<EpisodeConfig> {
