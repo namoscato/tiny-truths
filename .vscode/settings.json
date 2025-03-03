@@ -5,6 +5,7 @@
     "autoprefixer",
     "Exif",
     "exifreader",
+    "isbot",
     "vite",
     "Wavesurfer"
   ]

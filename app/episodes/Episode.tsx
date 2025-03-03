@@ -19,11 +19,7 @@ export const Episode = ({
     <>
       <EpisodeContent episode={episode} logoLink="/" />
       <Footer>
-        <ButtonLink to="/episodes" startIcon={<SkipBack />}>
-          Episodes
-        </ButtonLink>
-        {/* TODO: https://github.com/remix-run/react-router/issues/13142 */}
-        {/* <ButtonLink
+        <ButtonLink
           to={previousNumber ? `/episodes/${previousNumber}` : undefined}
           startIcon={<SkipBack />}
         >
@@ -34,7 +30,7 @@ export const Episode = ({
           endIcon={<SkipForward />}
         >
           Next
-        </ButtonLink> */}
+        </ButtonLink>
       </Footer>
     </>
   );
