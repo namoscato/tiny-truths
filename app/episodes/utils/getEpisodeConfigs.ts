@@ -22,8 +22,16 @@ export interface EpisodeConfigImage {
 
 /**
  * Return all episodes in reverse chronological order.
+ *
+ * @param properties returned subset of episode properties; defaults to all
  */
-export async function getEpisodeConfigs(): Promise<EpisodeConfig[]> {
+export async function getEpisodeConfigs(): Promise<EpisodeConfig[]>;
+export async function getEpisodeConfigs<T extends keyof EpisodeConfig>(
+  properties: T[],
+): Promise<Pick<EpisodeConfig, T>[]>;
+export async function getEpisodeConfigs<T extends keyof EpisodeConfig>(
+  properties?: T[],
+): Promise<EpisodeConfig[] | Pick<EpisodeConfig, T>[]> {
   const configs: EpisodeConfig[] = [];
 
   for (const [index, episode] of episodeConfigs.entries()) {
@@ -39,7 +47,19 @@ export async function getEpisodeConfigs(): Promise<EpisodeConfig[]> {
     });
   }
 
-  return configs.reverse();
+  return configs.reverse().map<Pick<EpisodeConfig, T>>((config) => {
+    if (!properties?.length) {
+      return config;
+    }
+
+    return properties.reduce(
+      (acc, prop) => ({
+        ...acc,
+        [prop]: config[prop],
+      }),
+      {} as Pick<EpisodeConfig, T>,
+    );
+  });
 }
 
 function titleFromNumber(number: number): string {

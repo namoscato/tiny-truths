@@ -4,8 +4,13 @@ import logoImg from "./images/logo.png";
 import { RecordedDate } from "./RecordedDate";
 import type { EpisodeConfig } from "./utils/getEpisodeConfigs";
 
+export type EpisodeListConfig = Pick<
+  EpisodeConfig,
+  "number" | "title" | "summary" | "date"
+>;
+
 interface Props {
-  episodes: EpisodeConfig[];
+  episodes: EpisodeListConfig[];
 }
 
 export const EpisodeList = ({ episodes }: Props) => {
