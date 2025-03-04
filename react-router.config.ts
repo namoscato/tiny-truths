@@ -21,6 +21,10 @@ export default {
       enabled:
         sourceMapsUploadOptions?.enabled ??
         (true && viteConfig.build.sourcemap !== false),
+      SENTRY_ORG: process.env.SENTRY_ORG,
+      SENTRY_PROJECT: process.env.SENTRY_PROJECT,
+      org,
+      project,
     });
     sentryOnBuildEnd({ viteConfig, reactRouterConfig, buildManifest });
   },
@@ -44,7 +48,6 @@ function getSentryConfig(viteConfig: unknown): SentryReactRouterBuildOptions {
     typeof viteConfig !== "object" ||
     !("sentryConfig" in viteConfig)
   ) {
-    // eslint-disable-next-line no-console
     console.error(
       "[Sentry] sentryConfig not found - it needs to be passed to vite.config.ts",
     );
