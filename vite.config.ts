@@ -12,6 +12,7 @@ const sentryConfig: SentryReactRouterBuildOptions = {
   org: "amoscato",
   project: "podcast",
   authToken: process.env.SENTRY_AUTH_TOKEN,
+  debug: true,
 };
 
 export default defineConfig((config) => ({
