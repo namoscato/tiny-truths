@@ -1,6 +1,6 @@
 import { useWavesurfer } from "@wavesurfer/react";
 import clsx from "clsx";
-import { useRef } from "react";
+import { useRef, type CSSProperties } from "react";
 import { Link } from "react-router";
 import type { EpisodeConfig } from "~/episodes/utils/getEpisodeConfigs";
 import styles from "./episodeContent.module.css";
@@ -14,7 +14,9 @@ interface Props {
   logoLink?: string;
 }
 
-const HEIGHT = 420;
+const WAVESURFER_HEIGHT = 420;
+
+const FEATURE_IMAGE_MAX_WIDTH = 475;
 
 export const EpisodeContent = ({ episode, logoLink }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -31,16 +33,23 @@ export const EpisodeContent = ({ episode, logoLink }: Props) => {
     cursorWidth: 2,
     waveColor: "#c0f2e1",
     progressColor: "#fcfafa",
-    height: HEIGHT,
+    height: WAVESURFER_HEIGHT,
   });
+
+  const headerStyle = {
+    ["--feature-image-max-height" as string]: `${Math.round(
+      (episode.featureImage.height / episode.featureImage.width) *
+        FEATURE_IMAGE_MAX_WIDTH,
+    )}px`,
+  } satisfies CSSProperties;
 
   const logo = <img src={logoImg} alt="Tiny Truths logo" width={469} />;
 
   return (
     <>
-      <div className={styles.header}>
+      <div className={styles.header} style={headerStyle}>
         <div className={styles.images}>
-          <div className={styles.logo}>
+          <div className={styles.imageContainer}>
             {/* TODO: consolidate with EpisodeList */}
             {logoLink ? (
               <Link to={logoLink} className={styles.logoLink}>
@@ -50,16 +59,17 @@ export const EpisodeContent = ({ episode, logoLink }: Props) => {
               logo
             )}
           </div>
-          <img
-            src={episode.image.url}
-            alt={episode.image.alt}
-            width={475}
-            className={styles.featureImage}
-          />
+          <div className={styles.imageContainer}>
+            <img
+              src={episode.featureImage.url}
+              alt={episode.featureImage.description ?? `${episode.title} image`}
+              className={styles.featureImage}
+            />
+          </div>
         </div>
         <div
           className={styles.wavesurfer}
-          style={{ marginTop: -1 * HEIGHT }}
+          style={{ marginTop: -1 * WAVESURFER_HEIGHT }}
           ref={containerRef}
         />
       </div>

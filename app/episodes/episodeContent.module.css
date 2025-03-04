@@ -1,5 +1,5 @@
 .header {
-  --feature-image-margin-bottom: -4.375rem;
+  --feature-image-margin-bottom: calc(600px - var(--feature-image-max-height));
 
   align-items: center;
   background-color: var(--color-green);
@@ -19,7 +19,7 @@
   }
 }
 
-.logo {
+.imageContainer {
   margin: 1rem;
 }
 
@@ -29,7 +29,7 @@
 
 .featureImage {
   margin-bottom: var(--feature-image-margin-bottom);
-  max-height: 33rem;
+  max-height: var(--feature-image-max-height);
   pointer-events: none;
   position: relative;
   width: auto;
@@ -87,18 +87,10 @@
     display: flex;
     justify-content: space-between;
     width: var(--max-width);
-
-    > img {
-      align-self: flex-start;
-    }
   }
 
-  .logo {
+  .imageContainer {
     margin: 0;
-  }
-
-  .featureImage {
-    max-height: 676px;
   }
 
   .wavesurfer {

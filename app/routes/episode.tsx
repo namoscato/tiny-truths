@@ -8,6 +8,7 @@ export function meta({ data }: Route.MetaArgs): Route.MetaDescriptors {
   return createRouteMeta({
     title: data ? createPageTitle(data.episode.title) : DEFAULT_TITLE,
     description: data?.episode.summary,
+    openGraphImage: data?.episode.openGraphImage,
   });
 }
 
@@ -33,4 +34,12 @@ export async function loader({
 
 export default function EpisodeRoute({ loaderData }: Route.ComponentProps) {
   return <Episode {...loaderData} />;
+}
+
+/**
+ * @todo remove after bug is fixed
+ * @see https://github.com/remix-run/react-router/issues/13142#issuecomment-2694834396
+ */
+export function shouldRevalidate(): boolean {
+  return true;
 }
