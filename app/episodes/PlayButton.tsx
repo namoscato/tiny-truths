@@ -1,16 +1,29 @@
 import { Pause, Play } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import type WaveSurfer from "wavesurfer.js";
 import styles from "./playButton.module.css";
+import type { EpisodeConfig } from "./utils/getEpisodeConfigs";
 
 interface Props {
   wavesurfer: WaveSurfer | null;
   isPlaying: boolean;
+  episode: Pick<EpisodeConfig, "title">;
 }
 
-export const PlayButton = ({ wavesurfer, isPlaying }: Props) => {
+export const PlayButton = ({ wavesurfer, isPlaying, episode }: Props) => {
+  const hasPlayed = useRef(false);
+
   const playPause = () => {
     wavesurfer?.playPause();
+
+    if (!hasPlayed.current) {
+      hasPlayed.current = true;
+      window.goatcounter?.count({
+        path: "episode_start",
+        title: episode.title,
+        event: true,
+      });
+    }
   };
 
   useEffect(() => {
