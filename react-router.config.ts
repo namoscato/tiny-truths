@@ -2,15 +2,16 @@ import type { Config } from "@react-router/dev/config";
 import { sentryOnBuildEnd } from "@sentry/react-router";
 import { getEpisodeConfigs } from "./app/episodes/utils/getEpisodeConfigs";
 
-const buildEnd: Config["buildEnd"] = ({
-  viteConfig,
-  reactRouterConfig,
-  buildManifest,
-}) => {
-  sentryOnBuildEnd({ viteConfig, reactRouterConfig, buildManifest });
-};
+export default {
+  buildEnd({ viteConfig, reactRouterConfig, buildManifest }) {
+    console.log(viteConfig);
+    sentryOnBuildEnd({ viteConfig, reactRouterConfig, buildManifest });
+  },
+  prerender,
+  ssr: false,
+} satisfies Config;
 
-const prerender: Config["prerender"] = async () => {
+async function prerender() {
   const episodes = await getEpisodeConfigs();
 
   return [
@@ -18,10 +19,4 @@ const prerender: Config["prerender"] = async () => {
     "/episodes",
     ...episodes.map(({ number }) => `/episodes/${number}`),
   ];
-};
-
-export default {
-  buildEnd,
-  prerender,
-  ssr: false,
-} satisfies Config;
+}
