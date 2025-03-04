@@ -25,6 +25,7 @@ export default {
       SENTRY_PROJECT: process.env.SENTRY_PROJECT,
       org,
       project,
+      buildDirectory: reactRouterConfig.buildDirectory,
     });
     sentryOnBuildEnd({ viteConfig, reactRouterConfig, buildManifest });
   },
