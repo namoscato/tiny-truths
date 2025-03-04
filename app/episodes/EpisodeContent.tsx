@@ -3,6 +3,7 @@ import clsx from "clsx";
 import { useRef, type CSSProperties } from "react";
 import { Link } from "react-router";
 import type { EpisodeConfig } from "~/episodes/utils/getEpisodeConfigs";
+import { Copyright } from "./Copyright";
 import styles from "./episodeContent.module.css";
 import { FormattedTime } from "./FormattedTime";
 import logoImg from "./images/logo.png";
@@ -96,6 +97,7 @@ export const EpisodeContent = ({ episode, logoLink }: Props) => {
         <h2>{episode.title}</h2>
         <p>{episode.summary}</p>
         <RecordedDate date={episode.date} />
+        <Copyright episode={episode} />
       </main>
     </>
   );
