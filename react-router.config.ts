@@ -6,7 +6,7 @@ import {
 import { getEpisodeConfigs } from "./app/episodes/utils/getEpisodeConfigs";
 
 export default {
-  buildEnd({ viteConfig, reactRouterConfig, buildManifest }) {
+  async buildEnd({ viteConfig, reactRouterConfig, buildManifest }) {
     const {
       authToken,
       org,
@@ -27,7 +27,7 @@ export default {
       project,
       buildDirectory: reactRouterConfig.buildDirectory,
     });
-    sentryOnBuildEnd({ viteConfig, reactRouterConfig, buildManifest });
+    await sentryOnBuildEnd({ viteConfig, reactRouterConfig, buildManifest });
   },
   prerender,
   ssr: false,
