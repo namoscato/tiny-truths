@@ -1,10 +1,27 @@
 import type { Config } from "@react-router/dev/config";
-import { sentryOnBuildEnd } from "@sentry/react-router";
+import {
+  sentryOnBuildEnd,
+  type SentryReactRouterBuildOptions,
+} from "@sentry/react-router";
 import { getEpisodeConfigs } from "./app/episodes/utils/getEpisodeConfigs";
 
 export default {
   buildEnd({ viteConfig, reactRouterConfig, buildManifest }) {
-    console.log(viteConfig);
+    const {
+      authToken,
+      org,
+      project,
+      release,
+      sourceMapsUploadOptions = { enabled: true },
+      debug = false,
+    } = getSentryConfig(viteConfig);
+
+    console.log({
+      sourceMapsUploadOptions,
+      enabled:
+        sourceMapsUploadOptions?.enabled ??
+        (true && viteConfig.build.sourcemap !== false),
+    });
     sentryOnBuildEnd({ viteConfig, reactRouterConfig, buildManifest });
   },
   prerender,
@@ -19,4 +36,20 @@ async function prerender() {
     "/episodes",
     ...episodes.map(({ number }) => `/episodes/${number}`),
   ];
+}
+
+function getSentryConfig(viteConfig: unknown): SentryReactRouterBuildOptions {
+  if (
+    !viteConfig ||
+    typeof viteConfig !== "object" ||
+    !("sentryConfig" in viteConfig)
+  ) {
+    // eslint-disable-next-line no-console
+    console.error(
+      "[Sentry] sentryConfig not found - it needs to be passed to vite.config.ts",
+    );
+  }
+
+  return (viteConfig as { sentryConfig: SentryReactRouterBuildOptions })
+    .sentryConfig;
 }
