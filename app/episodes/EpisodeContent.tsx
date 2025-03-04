@@ -75,7 +75,11 @@ export const EpisodeContent = ({ episode, logoLink }: Props) => {
       </div>
       <main className={styles.content}>
         <div className={styles.controls}>
-          <PlayButton wavesurfer={wavesurfer} isPlaying={isPlaying} />
+          <PlayButton
+            wavesurfer={wavesurfer}
+            isPlaying={isPlaying}
+            episode={episode}
+          />
           <div className={styles.time}>
             <span
               className={clsx({

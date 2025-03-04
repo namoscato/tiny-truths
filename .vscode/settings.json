@@ -5,6 +5,7 @@
     "autoprefixer",
     "Exif",
     "exifreader",
+    "goatcounter",
     "isbot",
     "opengraph",
     "vite",
