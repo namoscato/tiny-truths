@@ -14,7 +14,7 @@ export function meta({ data }: Route.MetaArgs): Route.MetaDescriptors {
   });
 }
 
-export async function loader({}: Route.LoaderArgs): Promise<EpisodeConfig> {
+export async function loader(): Promise<EpisodeConfig> {
   const episode = (await getEpisodeConfigs())[0];
 
   if (!episode) {
