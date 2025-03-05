@@ -1,6 +1,7 @@
+import { captureException } from "@sentry/react-router";
 import { useWavesurfer } from "@wavesurfer/react";
 import clsx from "clsx";
-import { useRef, type CSSProperties } from "react";
+import { useEffect, useRef, type CSSProperties } from "react";
 import { Link } from "react-router";
 import type { EpisodeConfig } from "~/episodes/utils/getEpisodeConfigs";
 import { Copyright } from "./Copyright";
@@ -36,6 +37,12 @@ export const EpisodeContent = ({ episode, logoLink }: Props) => {
     progressColor: "#fcfafa",
     height: WAVESURFER_HEIGHT,
   });
+
+  useEffect(() => {
+    return wavesurfer?.on("error", (error) => {
+      captureException(error);
+    });
+  }, [wavesurfer]);
 
   const headerStyle = {
     ["--feature-image-max-height" as string]: `${Math.round(
