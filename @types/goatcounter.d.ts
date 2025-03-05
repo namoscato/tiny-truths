@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-var
 declare var goatcounter: GoatCounter | undefined;
 
 interface GoatCounter {
