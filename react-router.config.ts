@@ -10,7 +10,9 @@ export default {
 
 function createBuildEnd(): Config["buildEnd"] {
   if (process.env.SENTRY_AUTH_TOKEN) {
-    return sentryOnBuildEnd;
+    // TODO: remove type assertion
+    // https://github.com/getsentry/sentry-javascript/pull/15583
+    return sentryOnBuildEnd as Config["buildEnd"];
   }
 }
 
