@@ -1,3 +1,4 @@
+import { captureException } from "@sentry/react-router";
 import clsx from "clsx";
 import { Pause, Play } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -18,6 +19,10 @@ export const PlayButton = ({ wavesurfer, isPlaying, episode }: Props) => {
   const isDisabled = !wavesurfer || isLoading;
 
   const playPause = useCallback(async () => {
+    if (isLoading) {
+      return;
+    }
+
     try {
       if (!wavesurfer) {
         throw new Error("Wavesurfer not initialized");
@@ -35,11 +40,11 @@ export const PlayButton = ({ wavesurfer, isPlaying, episode }: Props) => {
         });
       }
     } catch (error) {
-      console.error(error);
+      captureException(error);
     } finally {
       setIsLoading(false);
     }
-  }, [episode.number, episode.title, wavesurfer]);
+  }, [episode.number, episode.title, isLoading, wavesurfer]);
 
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
