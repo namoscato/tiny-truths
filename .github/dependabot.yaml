@@ -6,6 +6,12 @@ updates:
     schedule:
       interval: "monthly"
     groups:
+      eslint:
+        patterns:
+          - "@eslint/*"
+          - "eslint"
+          - "eslint-*"
+          - "typescript-eslint"
       react:
         patterns:
           - "react"
