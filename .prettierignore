@@ -1,2 +1,2 @@
-app/episodes/audio
+app/episodes/waveforms/*.json
 build

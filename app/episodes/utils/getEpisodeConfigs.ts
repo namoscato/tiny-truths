@@ -1,6 +1,6 @@
 import { access } from "fs/promises";
 import { join } from "path";
-import { getAudioPeaks } from "../audio/getAudioPeaks";
+import { getAudioPeaks } from "../waveforms/getAudioPeaks";
 import { episodeConfigs, type EpisodeConfigBase } from "./episodeConfigs";
 import { loadExif } from "./loadExif";
 import type { Audio } from "./types";
@@ -69,14 +69,18 @@ function titleFromNumber(number: number): string {
 }
 
 async function audioFromNumber(number: number): Promise<Audio> {
-  const url = await audioUrlFromNumber(number);
+  const webmUrl = await audioUrlFromNumber(number, "webm");
+  const mp3Url = await audioUrlFromNumber(number, "mp3");
   const peaks = getAudioPeaks(number);
 
-  return { url, peaks };
+  return { webmUrl, mp3Url, peaks };
 }
 
-async function audioUrlFromNumber(number: number): Promise<string> {
-  const url = `/episodes/audio/episode${number}.webm`;
+async function audioUrlFromNumber(
+  number: number,
+  extension: "webm" | "mp3",
+): Promise<string> {
+  const url = `/episodes/audio/episode${number}.${extension}`;
 
   // assert file exists
   await access(getPublicURL(url));
