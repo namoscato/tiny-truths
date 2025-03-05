@@ -22,10 +22,11 @@ const FEATURE_IMAGE_MAX_WIDTH = 475;
 
 export const EpisodeContent = ({ episode, logoLink }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
   const { wavesurfer, isPlaying, currentTime } = useWavesurfer({
     container: containerRef,
-    url: episode.audio.url,
+    media: audioRef.current ?? undefined,
     peaks: episode.audio.peaks,
     barAlign: "bottom",
     barGap: 4,
@@ -80,6 +81,10 @@ export const EpisodeContent = ({ episode, logoLink }: Props) => {
           style={{ marginTop: -1 * WAVESURFER_HEIGHT }}
           ref={containerRef}
         />
+        <audio ref={audioRef}>
+          <source src={episode.audio.webmUrl} type="audio/webm" />
+          <source src={episode.audio.mp3Url} type="audio/mpeg" />
+        </audio>
       </div>
       <main className={styles.content}>
         <div className={styles.controls}>

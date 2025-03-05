@@ -1,4 +1,5 @@
 export interface Audio {
-  url: string;
+  webmUrl: string;
+  mp3Url: string;
   peaks: number[][];
 }

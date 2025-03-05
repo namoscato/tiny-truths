@@ -19,16 +19,16 @@ Amoscato podcast website built with [React Router](https://reactrouter.com/).
 
 ### Add Episode
 
-1. Add MP3 to [./app/episodes/audio/](./app/episodes/audio/) directory
+1. Add MP3 to [./public/episodes/audio/](./public/episodes/audio/) directory
 
 1. Generate waveform peaks:
 
    ```bash
    EPISODE_NUMBER=1
-   audiowaveform --input-filename ./app/episodes/audio/episode${EPISODE_NUMBER}.mp3 --output-filename ./app/episodes/audio/episode${EPISODE_NUMBER}.json --pixels-per-second 1 --bits 8
+   audiowaveform --input-filename ./public/episodes/audio/episode${EPISODE_NUMBER}.mp3 --output-filename ./app/episodes/waveforms/episode${EPISODE_NUMBER}.json --pixels-per-second 1 --bits 8
    ```
 
-1. Add JSON data to [`episodePeaks` array](./app/episodes/audio/getAudioPeaks.ts)
+1. Add JSON data to [`episodePeaks` array](./app/episodes/waveforms/getAudioPeaks.ts)
 
 1. Add WebM to [./public/episodes/audio/](./public/episodes/audio/), converted from MP3 via VLC
 
