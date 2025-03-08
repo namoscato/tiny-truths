@@ -81,7 +81,7 @@ export const EpisodeContent = ({ episode, logoLink }: Props) => {
           style={{ marginTop: -1 * WAVESURFER_HEIGHT }}
           ref={containerRef}
         />
-        <audio ref={audioRef}>
+        <audio key={episode.audio.webmUrl} ref={audioRef}>
           <source src={episode.audio.webmUrl} type="audio/webm" />
           <source src={episode.audio.mp3Url} type="audio/mpeg" />
         </audio>
