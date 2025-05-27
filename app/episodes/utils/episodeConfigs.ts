@@ -33,4 +33,16 @@ export const episodeConfigs: EpisodeConfigBase[] = [
       },
     ],
   },
+  {
+    date: new Date("2025-05-14"),
+    summary:
+      'Giovanni reads from his "I Spy" book, reflects on a road trip to Connecticut, and sings more of his favorite songs.',
+    copyright: [
+      themeSong,
+      {
+        text: "Yo-Yo Ma",
+        url: "https://youtu.be/1prweT95Mo0?si=wqx7vM7zWEb4PXyg",
+      },
+    ],
+  },
 ];
