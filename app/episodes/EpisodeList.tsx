@@ -19,7 +19,7 @@ export const EpisodeList = ({ episodes }: Props) => {
       <header className={styles.header}>
         <div className={styles.logo}>
           {/* TODO: consolidate with EpisodeContent */}
-          <Link to="/" className={styles.logoLink}>
+          <Link to="/" className={styles.logoLink} prefetch="viewport">
             <img src={logoImg} alt="Tiny Truths logo" width={469} />
           </Link>
         </div>
@@ -27,7 +27,11 @@ export const EpisodeList = ({ episodes }: Props) => {
       <ol className={styles.list}>
         {episodes.map((episode) => (
           <li key={episode.number}>
-            <Link className={styles.episode} to={`/episodes/${episode.number}`}>
+            <Link
+              className={styles.episode}
+              to={`/episodes/${episode.number}`}
+              prefetch="viewport"
+            >
               <h2>{episode.title}</h2>
               <p>{episode.summary}</p>
               <RecordedDate date={episode.date} />
