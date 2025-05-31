@@ -1,5 +1,5 @@
-import type { MetaDescriptors } from "react-router/route-module";
 import type { EpisodeConfigImage } from "~/episodes/utils/getEpisodeConfigs";
+import type { Route } from "../../routes/+types/home";
 
 const DEFAULT_DESCRIPTION = "An Amoscato podcast";
 
@@ -17,7 +17,7 @@ export function createRouteMeta({
     width: 1200,
     height: 630,
   },
-}: Dependencies): MetaDescriptors {
+}: Dependencies): Route.MetaDescriptors {
   return [
     { title },
     { name: "description", content: description },

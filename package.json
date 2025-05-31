@@ -4,7 +4,9 @@
   "type": "module",
   "scripts": {
     "build": "cross-env NODE_ENV=production react-router build",
-    "dev": "react-router dev",
+    "dev": "concurrently --raw \"npm:dev:*\";",
+    "dev:server": "react-router dev",
+    "dev:ts": "tsc --watch",
     "typecheck": "react-router typegen && tsc",
     "prettier": "prettier --check .",
     "prettier:fix": "prettier --write .",
@@ -29,6 +31,7 @@
     "@types/react": "^19.1.6",
     "@types/react-dom": "^19.1.5",
     "autoprefixer": "^10.4.21",
+    "concurrently": "^9.1.2",
     "cross-env": "^7.0.3",
     "eslint": "^9.28.0",
     "eslint-plugin-react-hooks": "^5.2.0",
