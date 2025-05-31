@@ -61,7 +61,11 @@ export const EpisodeContent = ({ episode, logoLink }: Props) => {
           <div className={styles.imageContainer}>
             {/* TODO: consolidate with EpisodeList */}
             {logoLink ? (
-              <Link to={logoLink} className={styles.logoLink}>
+              <Link
+                to={logoLink}
+                className={styles.logoLink}
+                prefetch="viewport"
+              >
                 {logo}
               </Link>
             ) : (

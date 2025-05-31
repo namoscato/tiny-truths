@@ -12,7 +12,7 @@ interface Props {
 
 export const ButtonLink = ({ to, children, startIcon, endIcon }: Props) => {
   return to ? (
-    <Link to={to} className={styles.link}>
+    <Link to={to} className={styles.link} prefetch="viewport">
       {startIcon}
       {children}
       {endIcon}
