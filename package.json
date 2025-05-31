@@ -11,7 +11,7 @@
     "eslint": "eslint ."
   },
   "dependencies": {
-    "@react-router/node": "^7.2.0",
+    "@react-router/node": "^7.6.1",
     "@sentry/react-router": "^9.3.0",
     "@wavesurfer/react": "^1.0.9",
     "clsx": "^2.1.1",
@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.28.0",
-    "@react-router/dev": "^7.2.0",
+    "@react-router/dev": "^7.6.1",
     "@types/node": "^20",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
