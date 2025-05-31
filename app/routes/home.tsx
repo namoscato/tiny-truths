@@ -10,7 +10,7 @@ import { createRouteMeta } from "./utils/createRouteMeta";
 export function meta({ data }: Route.MetaArgs): Route.MetaDescriptors {
   return createRouteMeta({
     title: DEFAULT_TITLE,
-    openGraphImage: data.openGraphImage,
+    openGraphImage: data?.openGraphImage,
   });
 }
 
