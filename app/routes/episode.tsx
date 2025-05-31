@@ -35,11 +35,3 @@ export async function loader({
 export default function EpisodeRoute({ loaderData }: Route.ComponentProps) {
   return <Episode {...loaderData} />;
 }
-
-/**
- * @todo remove after bug is fixed
- * @see https://github.com/remix-run/react-router/issues/13142#issuecomment-2694834396
- */
-export function shouldRevalidate(): boolean {
-  return true;
-}
