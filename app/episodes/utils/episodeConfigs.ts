@@ -45,4 +45,16 @@ export const episodeConfigs: EpisodeConfigBase[] = [
       },
     ],
   },
+  {
+    date: new Date("2025-07-16"),
+    summary:
+      "Giovanni reflects on a trip to the dentist, learns his family members' first names, and sings one of his favorite summer rock songs.",
+    copyright: [
+      themeSong,
+      {
+        text: "Chicago",
+        url: "https://youtu.be/HjylD7esXDo?si=rcdhuT2PdBKWapU-",
+      },
+    ],
+  },
 ];
