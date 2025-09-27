@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { redirect, useNavigate, type Register } from "react-router";
 import { Episode, type EpisodeProps } from "../episodes/Episode";
 import { getEpisodeConfigs } from "../episodes/utils/getEpisodeConfigs";
 import type { Route } from "../routes/+types/episode";
@@ -22,7 +24,7 @@ export async function loader({
   );
 
   if (!episodes[episodeIndex]) {
-    throw new Response("Not Found", { status: 404 });
+    throw redirect("/episodes" satisfies RoutePath);
   }
 
   return {
@@ -35,3 +37,15 @@ export async function loader({
 export default function EpisodeRoute({ loaderData }: Route.ComponentProps) {
   return <Episode {...loaderData} />;
 }
+
+export function ErrorBoundary() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    void navigate("/episodes" satisfies RoutePath, { replace: true });
+  }, [navigate]);
+
+  return null;
+}
+
+type RoutePath = keyof Register["pages"];
