@@ -1,3 +1,4 @@
+import { redirect } from "react-router";
 import { Episode, type EpisodeProps } from "../episodes/Episode";
 import { getEpisodeConfigs } from "../episodes/utils/getEpisodeConfigs";
 import type { Route } from "../routes/+types/episode";
@@ -22,7 +23,7 @@ export async function loader({
   );
 
   if (!episodes[episodeIndex]) {
-    throw new Response("Not Found", { status: 404 });
+    throw redirect("/episodes");
   }
 
   return {
