@@ -6,11 +6,13 @@ import type { Route } from "../routes/+types/episode";
 import { createPageTitle, DEFAULT_TITLE } from "./utils/createPageTitle";
 import { createRouteMeta } from "./utils/createRouteMeta";
 
-export function meta({ data }: Route.MetaArgs): Route.MetaDescriptors {
+export function meta({ loaderData }: Route.MetaArgs): Route.MetaDescriptors {
   return createRouteMeta({
-    title: data ? createPageTitle(data.episode.title) : DEFAULT_TITLE,
-    description: data?.episode.summary,
-    openGraphImage: data?.episode.openGraphImage,
+    title: loaderData
+      ? createPageTitle(loaderData.episode.title)
+      : DEFAULT_TITLE,
+    description: loaderData?.episode.summary,
+    openGraphImage: loaderData?.episode.openGraphImage,
   });
 }
 

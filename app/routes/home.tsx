@@ -7,10 +7,10 @@ import type { Route } from "../routes/+types/home";
 import { DEFAULT_TITLE } from "./utils/createPageTitle";
 import { createRouteMeta } from "./utils/createRouteMeta";
 
-export function meta({ data }: Route.MetaArgs): Route.MetaDescriptors {
+export function meta({ loaderData }: Route.MetaArgs): Route.MetaDescriptors {
   return createRouteMeta({
     title: DEFAULT_TITLE,
-    openGraphImage: data?.openGraphImage,
+    openGraphImage: loaderData.openGraphImage,
   });
 }
 
