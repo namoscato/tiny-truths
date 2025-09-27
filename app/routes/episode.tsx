@@ -1,4 +1,5 @@
-import { redirect } from "react-router";
+import { useEffect } from "react";
+import { redirect, useNavigate } from "react-router";
 import { Episode, type EpisodeProps } from "../episodes/Episode";
 import { getEpisodeConfigs } from "../episodes/utils/getEpisodeConfigs";
 import type { Route } from "../routes/+types/episode";
@@ -35,4 +36,14 @@ export async function loader({
 
 export default function EpisodeRoute({ loaderData }: Route.ComponentProps) {
   return <Episode {...loaderData} />;
+}
+
+export function ErrorBoundary() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    void navigate("/episodes", { replace: true });
+  }, [navigate]);
+
+  return null;
 }
