@@ -57,4 +57,16 @@ export const episodeConfigs: EpisodeConfigBase[] = [
       },
     ],
   },
+  {
+    date: new Date("2025-12-03"),
+    summary:
+      "Giovanni describes holiday traditions, talks about his friends at school, and gives advice for living a healthy New Year.",
+    copyright: [
+      themeSong,
+      {
+        text: "Bobby Helms",
+        url: "https://youtu.be/fyEAX7Cd3OE?si=6Wi8Kwh8RmjwpWTJ",
+      },
+    ],
+  },
 ];
