@@ -26,6 +26,10 @@ export const EpisodeContent = ({ episode, logoLink }: Props) => {
 
   const { wavesurfer, isPlaying, currentTime } = useWavesurfer({
     container: containerRef,
+    // WaveSurfer instance will only be instantiated once `containerRef` is defined,
+    // at which point `audioRef` should also be defined:
+    // https://github.com/katspaugh/wavesurfer-react/blob/1.0.11/src/index.tsx#L46-L51
+    // eslint-disable-next-line react-hooks/refs
     media: audioRef.current ?? undefined,
     peaks: episode.audio.peaks,
     barAlign: "bottom",
