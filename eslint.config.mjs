@@ -2,9 +2,10 @@
 
 import eslint from "@eslint/js";
 import * as reactHooks from "eslint-plugin-react-hooks";
+import { defineConfig } from "eslint/config";
 import tseslint from "typescript-eslint";
 
-export default tseslint.config(
+export default defineConfig(
   {
     ignores: [".react-router/", "build/"],
   },
@@ -21,5 +22,5 @@ export default tseslint.config(
       "@typescript-eslint/only-throw-error": "off",
     },
   },
-  reactHooks.configs["recommended-latest"],
+  reactHooks.configs.flat.recommended,
 );
