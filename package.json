@@ -6,10 +6,10 @@
     "node": ">=22.x <23"
   },
   "scripts": {
-    "build": "cross-env NODE_ENV=production react-router build",
+    "build": "react-router build",
     "dev": "concurrently --raw \"npm:dev:*\";",
     "dev:server": "react-router dev",
-    "dev:ts": "tsc --watch",
+    "dev:ts": "tsc --watch --preserveWatchOutput",
     "typecheck": "react-router typegen && tsc",
     "prettier": "prettier --check .",
     "prettier:fix": "prettier --write .",
@@ -35,7 +35,6 @@
     "@types/react-dom": "^19.2.3",
     "autoprefixer": "^10.4.23",
     "concurrently": "^9.2.1",
-    "cross-env": "^10.1.0",
     "eslint": "^9.39.2",
     "eslint-plugin-react-hooks": "^7.0.1",
     "exifreader": "^4.33.1",
