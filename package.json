@@ -28,21 +28,21 @@
     "sanitize.css": "^13.0.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.2",
+    "@eslint/js": "^10.0.1",
     "@react-router/dev": "^7.11.0",
     "@types/node": "^22.19.3",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "autoprefixer": "^10.4.23",
     "concurrently": "^9.2.1",
-    "eslint": "^9.39.2",
+    "eslint": "^10.0.2",
     "eslint-plugin-react-hooks": "^7.0.1",
     "exifreader": "^4.33.1",
     "postcss": "^8.5.6",
     "postcss-nesting": "^13.0.2",
     "prettier": "3.7.4",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.51.0",
+    "typescript-eslint": "^8.56.1",
     "vite": "^7.3.0",
     "vite-tsconfig-paths": "^6.0.3"
   }
