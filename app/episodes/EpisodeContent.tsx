@@ -10,6 +10,7 @@ import { FormattedTime } from "./FormattedTime";
 import logoImg from "./images/logo.png";
 import { PlayButton } from "./PlayButton";
 import { RecordedDate } from "./RecordedDate";
+import { Transcript } from "./Transcript";
 
 interface Props {
   episode: EpisodeConfig;
@@ -117,6 +118,13 @@ export const EpisodeContent = ({ episode, logoLink }: Props) => {
         <h2>{episode.title}</h2>
         <p>{episode.summary}</p>
         <RecordedDate date={episode.date} />
+        {episode.transcript && (
+          <Transcript
+            transcript={episode.transcript}
+            wavesurfer={wavesurfer}
+            currentTime={currentTime}
+          />
+        )}
         <Copyright episode={episode} />
       </main>
     </>
