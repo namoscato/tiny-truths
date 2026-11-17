@@ -17,7 +17,7 @@ See `README.md`. CI (`.github/workflows/ci.yaml`) runs typecheck, Prettier, and 
 **Episode data pipeline.** Episodes have no explicit IDs. An episode's number is its 1-based position in the `episodeConfigs` array (`app/episodes/utils/episodeConfigs.ts`). `getEpisodeConfigs()` (`app/episodes/utils/getEpisodeConfigs.ts`) builds full episode objects from that array:
 
 - derives `number` and `title` ("Episode 01", …)
-- checks that `public/episodes/audio/episode{N}.{mp3,webm}` exist, and fails the build if they don't
+- checks that `public/episodes/audio/episode{N}.mp3` exists, and fails the build if it doesn't
 - reads width, height, and `ImageDescription` (used as alt text) from the EXIF data of `public/episodes/images/episode{N}.png` and `episode{N}-opengraph.jpg`
 - parses the optional `public/episodes/transcripts/episode{N}.vtt` (a Descript subtitle export) into speaker paragraphs of timed cues
 - attaches waveform peaks from `app/episodes/waveforms/getAudioPeaks.ts`, which must statically import each `episode{N}.json`

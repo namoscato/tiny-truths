@@ -72,18 +72,14 @@ function titleFromNumber(number: number): string {
 }
 
 async function audioFromNumber(number: number): Promise<Audio> {
-  const webmUrl = await audioUrlFromNumber(number, "webm");
-  const mp3Url = await audioUrlFromNumber(number, "mp3");
+  const mp3Url = await audioUrlFromNumber(number);
   const peaks = getAudioPeaks(number);
 
-  return { webmUrl, mp3Url, peaks };
+  return { mp3Url, peaks };
 }
 
-async function audioUrlFromNumber(
-  number: number,
-  extension: "webm" | "mp3",
-): Promise<string> {
-  const url = `/episodes/audio/episode${number}.${extension}`;
+async function audioUrlFromNumber(number: number): Promise<string> {
+  const url = `/episodes/audio/episode${number}.mp3`;
 
   // assert file exists
   await access(getPublicURL(url));

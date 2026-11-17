@@ -16,7 +16,6 @@ An episode's number is its 1-based position in the `episodeConfigs` array, so th
   brew install audiowaveform
   ```
 
-- [VLC media player](https://www.videolan.org/vlc/) to convert MP3 to WebM
 - [ExifTool](https://exiftool.org/) to set image descriptions
 
 ## Inputs
@@ -43,8 +42,6 @@ Ask the user for anything not provided:
    ```
 
 1. Import the new JSON and append it to the `episodePeaks` array in `app/episodes/waveforms/getAudioPeaks.ts`.
-
-1. Add `public/episodes/audio/episode${N}.webm`, converted from the MP3 with VLC. The user does this step by hand.
 
 1. Add a [compressed](https://tinypng.com/) feature image as `public/episodes/images/episode${N}.png`.
 
