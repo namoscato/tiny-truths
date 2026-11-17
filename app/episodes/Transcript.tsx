@@ -1,5 +1,6 @@
 import clsx from "clsx";
-import { useEffect, useMemo, useRef } from "react";
+import { ChevronRight } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type WaveSurfer from "wavesurfer.js";
 import { FormattedTime } from "./FormattedTime";
 import styles from "./transcript.module.css";
@@ -18,6 +19,8 @@ export const Transcript = ({ transcript, wavesurfer, currentTime }: Props) => {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const activeRef = useRef<HTMLButtonElement>(null);
   const lastManualScroll = useRef(0);
+  const [isOpen, setIsOpen] = useState(false);
+  const wasOpen = useRef(false);
 
   const starts = useMemo(
     () => transcript.flatMap(({ cues }) => cues.map(({ start }) => start)),
@@ -30,20 +33,25 @@ export const Transcript = ({ transcript, wavesurfer, currentTime }: Props) => {
   useEffect(() => {
     const scroller = scrollerRef.current;
     const active = activeRef.current;
+    const justOpened = isOpen && !wasOpen.current;
+    wasOpen.current = isOpen;
 
     if (
+      !isOpen ||
       !scroller ||
       !active ||
-      Date.now() - lastManualScroll.current < MANUAL_SCROLL_PAUSE_MS
+      (!justOpened &&
+        Date.now() - lastManualScroll.current < MANUAL_SCROLL_PAUSE_MS)
     ) {
       return;
     }
 
     scroller.scrollTo({
       top: active.offsetTop - scroller.clientHeight / 3,
-      behavior: prefersReducedMotion() ? "auto" : "smooth",
+      // jump straight to the current line when the transcript is expanded
+      behavior: justOpened || prefersReducedMotion() ? "instant" : "smooth",
     });
-  }, [activeIndex]);
+  }, [activeIndex, isOpen]);
 
   const handleManualScroll = () => {
     lastManualScroll.current = Date.now();
@@ -52,10 +60,15 @@ export const Transcript = ({ transcript, wavesurfer, currentTime }: Props) => {
   let cueIndex = 0;
 
   return (
-    <section className={styles.root} aria-labelledby="transcript-heading">
-      <h3 id="transcript-heading" className={styles.heading}>
+    <details
+      className={styles.root}
+      open={isOpen}
+      onToggle={(event) => setIsOpen(event.currentTarget.open)}
+    >
+      <summary className={styles.summary}>
+        <ChevronRight className={styles.chevron} aria-hidden />
         Transcript
-      </h3>
+      </summary>
       <div
         ref={scrollerRef}
         className={styles.scroller}
@@ -73,6 +86,7 @@ export const Transcript = ({ transcript, wavesurfer, currentTime }: Props) => {
                   {speaker}
                   {firstCue && (
                     <span className={styles.timestamp}>
+                      {" · "}
                       <FormattedTime>{firstCue.start}</FormattedTime>
                     </span>
                   )}
@@ -103,7 +117,7 @@ export const Transcript = ({ transcript, wavesurfer, currentTime }: Props) => {
           );
         })}
       </div>
-    </section>
+    </details>
   );
 };
 

@@ -118,6 +118,7 @@ export const EpisodeContent = ({ episode, logoLink }: Props) => {
         <h2>{episode.title}</h2>
         <p>{episode.summary}</p>
         <RecordedDate date={episode.date} />
+        <Copyright episode={episode} />
         {episode.transcript && (
           <Transcript
             transcript={episode.transcript}
@@ -125,7 +126,6 @@ export const EpisodeContent = ({ episode, logoLink }: Props) => {
             currentTime={currentTime}
           />
         )}
-        <Copyright episode={episode} />
       </main>
     </>
   );

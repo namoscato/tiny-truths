@@ -1,26 +1,58 @@
 .root {
-  margin: 2rem 0 1rem;
+  --cue-active-color: color-mix(in srgb, var(--color-green) 30%, transparent);
+  --cue-padding: 0.3em;
+  /* room for the highlight so the scroller doesn't clip it */
+  --scroller-gutter: 0.75rem;
+
+  margin: 1.5rem 0 1rem;
 }
 
-.heading {
-  font-family: "DM Serif Text", serif;
-  font-size: 1.5rem;
-  font-weight: 400;
-  margin: 0 0 0.5rem;
+.summary {
+  align-items: center;
+  cursor: pointer;
+  display: inline-flex;
+  gap: 0.25rem;
+  list-style: none;
+  margin-left: -0.25rem;
+  user-select: none;
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-black);
+    outline-offset: 2px;
+  }
+}
+
+.chevron {
+  height: 1.25em;
+  transition: transform 150ms;
+  width: 1.25em;
+}
+
+.root[open] .chevron {
+  transform: rotate(90deg);
 }
 
 .scroller {
-  border-bottom: 1px solid var(--color-gray-light);
-  border-top: 1px solid var(--color-gray-light);
+  /* top and bottom rules, inset to line up with the text rather than the gutter */
+  background:
+    linear-gradient(var(--color-gray-light), var(--color-gray-light)) top /
+      calc(100% - 2 * var(--scroller-gutter)) 1px no-repeat,
+    linear-gradient(var(--color-gray-light), var(--color-gray-light)) bottom /
+      calc(100% - 2 * var(--scroller-gutter)) 1px no-repeat;
+  margin: 0.75rem calc(-1 * var(--scroller-gutter)) 0;
   max-height: 22rem;
   overflow-y: auto;
   overscroll-behavior: contain;
-  padding: 0.5rem 0;
+  padding: 0.75rem var(--scroller-gutter);
   position: relative;
 }
 
 .paragraph {
-  line-height: 1.6;
+  line-height: 1.7;
   margin: 0 0 1rem;
 
   &:last-child {
@@ -29,35 +61,32 @@
 }
 
 .speaker {
+  color: var(--color-gray);
   display: block;
   font-size: 0.875rem;
-  font-weight: 700;
 }
 
 .timestamp {
-  color: var(--color-gray);
   font-variant-numeric: tabular-nums;
-  font-weight: 400;
-  margin-left: 0.5rem;
 }
 
 .cue {
   background: none;
   border: 0;
-  border-radius: 3px;
+  border-radius: 0.5em;
   color: inherit;
   cursor: pointer;
   display: inline;
   font: inherit;
-  margin: 0 0.15em 0 -0.15em;
-  padding: 0 0.15em;
+  margin: 0 calc(0.3em - var(--cue-padding)) 0 calc(-1 * var(--cue-padding));
+  padding: 0 var(--cue-padding);
   text-align: inherit;
   transition:
-    background-color 150ms,
-    color 150ms;
+    background-color 200ms,
+    color 200ms;
 
   @media (hover: hover) {
-    &:hover:not(:disabled) {
+    &:hover:not(:disabled, .cueActive) {
       background-color: var(--color-gray-light);
     }
   }
@@ -75,13 +104,28 @@
   color: var(--color-gray);
 }
 
-.cueActive.cueActive {
-  background-color: var(--color-green);
+.cueActive {
+  animation: cue-activate 400ms ease-out;
+  background-color: var(--cue-active-color);
+  box-shadow: 0 0 0 0.15em var(--cue-active-color);
   color: var(--color-black);
 }
 
+/* Grow the highlight with a box-shadow rather than padding so the
+   surrounding text doesn't reflow. */
+@keyframes cue-activate {
+  from {
+    box-shadow: 0 0 0 0.4em var(--cue-active-color);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .chevron,
   .cue {
     transition: none;
+  }
+
+  .cueActive {
+    animation: none;
   }
 }
