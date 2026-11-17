@@ -7,6 +7,12 @@
   margin: 1.5rem 0 1rem;
   /* match the text column and footer so their edges and dividers line up */
   max-width: var(--max-width-small);
+  --fade-height: 4rem;
+}
+
+/* sit flush against the footer's divider (cancels its top margin) */
+.root[open] {
+  margin-bottom: -2rem;
 }
 
 .summary {
@@ -44,12 +50,16 @@
   background: linear-gradient(var(--color-gray-light), var(--color-gray-light))
     top / calc(100% - 2 * var(--scroller-gutter)) 1px no-repeat;
   /* fade out lines cut off at the bottom of the scroller */
-  mask-image: linear-gradient(to bottom, #000 calc(100% - 2rem), transparent);
+  mask-image: linear-gradient(
+    to bottom,
+    #000 calc(100% - var(--fade-height)),
+    transparent
+  );
   margin: 0.75rem calc(-1 * var(--scroller-gutter)) 0;
   max-height: 22rem;
   overflow-y: auto;
   overscroll-behavior: contain;
-  padding: 0.75rem var(--scroller-gutter) 2rem;
+  padding: 0.75rem var(--scroller-gutter) var(--fade-height);
   position: relative;
 }
 
