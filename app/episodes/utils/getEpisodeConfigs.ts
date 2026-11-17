@@ -1,9 +1,10 @@
-import { access } from "fs/promises";
+import { access, readFile } from "fs/promises";
 import { join } from "path";
 import { getAudioPeaks } from "../waveforms/getAudioPeaks";
 import { episodeConfigs, type EpisodeConfigBase } from "./episodeConfigs";
 import { loadExif } from "./loadExif";
-import type { Audio } from "./types";
+import { parseTranscript } from "./parseTranscript";
+import type { Audio, Transcript } from "./types";
 
 export interface EpisodeConfig extends EpisodeConfigBase {
   number: number;
@@ -11,6 +12,7 @@ export interface EpisodeConfig extends EpisodeConfigBase {
   audio: Audio;
   featureImage: EpisodeConfigImage;
   openGraphImage: EpisodeConfigImage;
+  transcript: Transcript | undefined;
 }
 
 export interface EpisodeConfigImage {
@@ -44,6 +46,7 @@ export async function getEpisodeConfigs<T extends keyof EpisodeConfig>(
       audio: await audioFromNumber(number),
       featureImage: await imageFromName(`episode${number}.png`),
       openGraphImage: await imageFromName(`episode${number}-opengraph.jpg`),
+      transcript: await transcriptFromNumber(number),
     });
   }
 
@@ -86,6 +89,28 @@ async function audioUrlFromNumber(
   await access(getPublicURL(url));
 
   return url;
+}
+
+/**
+ * Optional WebVTT transcript exported from Descript (Export → Subtitles).
+ */
+async function transcriptFromNumber(
+  number: number,
+): Promise<Transcript | undefined> {
+  const url = `/episodes/transcripts/episode${number}.vtt`;
+
+  let vtt: string;
+  try {
+    vtt = await readFile(getPublicURL(url), "utf8");
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === "ENOENT") {
+      return undefined;
+    }
+
+    throw error;
+  }
+
+  return parseTranscript(vtt);
 }
 
 async function imageFromName(name: string): Promise<EpisodeConfigImage> {

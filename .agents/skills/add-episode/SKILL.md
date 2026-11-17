@@ -29,6 +29,7 @@ Ask the user for anything not provided:
 - copyright credits (text and URL) beyond the theme song
 - feature image and its description (used as alt text)
 - Open Graph image
+- optional transcript: a WebVTT file from Descript (Export → Subtitles, Format .vtt, Show speakers on, Max lines per card 1, Max characters per line ~80)
 
 ## Steps
 
@@ -54,6 +55,8 @@ Ask the user for anything not provided:
    ```
 
 1. Add the Open Graph image as `public/episodes/images/episode${N}-opengraph.jpg`.
+
+1. If there is a transcript, add it as `public/episodes/transcripts/episode${N}.vtt`. It is optional; without it the episode page shows no transcript.
 
 1. Append an entry to the `episodeConfigs` array in `app/episodes/utils/episodeConfigs.ts`. Include the shared `themeSong` credit first in `copyright`.
 

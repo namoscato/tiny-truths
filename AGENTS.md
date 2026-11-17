@@ -19,6 +19,7 @@ See `README.md`. CI (`.github/workflows/ci.yaml`) runs typecheck, Prettier, and 
 - derives `number` and `title` ("Episode 01", …)
 - checks that `public/episodes/audio/episode{N}.{mp3,webm}` exist, and fails the build if they don't
 - reads width, height, and `ImageDescription` (used as alt text) from the EXIF data of `public/episodes/images/episode{N}.png` and `episode{N}-opengraph.jpg`
+- parses the optional `public/episodes/transcripts/episode{N}.vtt` (a Descript subtitle export) into speaker paragraphs of timed cues
 - attaches waveform peaks from `app/episodes/waveforms/getAudioPeaks.ts`, which must statically import each `episode{N}.json`
 - returns episodes newest-first; it optionally accepts a list of properties to keep loader payloads small
 
