@@ -69,4 +69,20 @@ export const episodeConfigs: EpisodeConfigBase[] = [
       },
     ],
   },
+  {
+    date: new Date("2026-11-15"),
+    summary:
+      "Giovanni shares his puzzle-building tips, celebrates turning four with a Toy Story theme, and sings along with Melody.",
+    copyright: [
+      themeSong,
+      {
+        text: "Taylor Swift",
+        url: "https://youtu.be/1FVF-9KQiPo?si=nv6J7u0Zn1lSdL_3",
+      },
+      {
+        text: "Ms. Rachel",
+        url: "https://youtu.be/AyZNnxLGGlw?si=BTdbIkdGeYv24HuL",
+      },
+    ],
+  },
 ];
