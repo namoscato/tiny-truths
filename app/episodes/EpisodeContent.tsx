@@ -90,9 +90,14 @@ export const EpisodeContent = ({ episode, logoLink }: Props) => {
           style={{ marginTop: -1 * WAVESURFER_HEIGHT }}
           ref={containerRef}
         />
-        <audio key={episode.audio.webmUrl} ref={audioRef}>
-          <source src={episode.audio.webmUrl} type="audio/webm" />
+        {/*
+          MP3 must come first. The WebM files are Vorbis, which iOS Safari
+          claims to support (so it picks WebM over MP3) but can't actually
+          play: audio stops after a moment while `currentTime` keeps advancing.
+        */}
+        <audio key={episode.audio.mp3Url} ref={audioRef}>
           <source src={episode.audio.mp3Url} type="audio/mpeg" />
+          <source src={episode.audio.webmUrl} type="audio/webm" />
         </audio>
       </div>
       <main className={styles.content}>
