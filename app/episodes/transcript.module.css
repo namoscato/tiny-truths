@@ -7,8 +7,7 @@
   margin: 1.5rem 0 1rem;
   /* match the text column and footer so their edges and dividers line up */
   max-width: var(--max-width-small);
-  --fade-top: 1.5rem;
-  --fade-bottom: 7rem;
+  --fade-bottom: 5.5rem;
 }
 
 /* sit flush against the footer's divider (cancels its top margin) */
@@ -46,12 +45,14 @@
 }
 
 .scroller {
-  /* Fade lines in at the top and out toward the footer's divider. Stops ease
-     the bottom fade so it lingers near opaque before dropping off. */
+  /* top rule, inset to line up with the text rather than the gutter; the
+     footer's rule closes the transcript at the bottom */
+  background: linear-gradient(var(--color-gray-light), var(--color-gray-light))
+    top / calc(100% - 2 * var(--scroller-gutter)) 1px no-repeat;
+  /* Fade lines out toward the footer's divider. Stops ease the fade so it
+     lingers near opaque before dropping off. */
   mask-image: linear-gradient(
     to bottom,
-    transparent,
-    #000 var(--fade-top),
     #000 calc(100% - var(--fade-bottom)),
     rgb(0 0 0 / 0.9) calc(100% - 0.8 * var(--fade-bottom)),
     rgb(0 0 0 / 0.7) calc(100% - 0.6 * var(--fade-bottom)),
@@ -63,7 +64,7 @@
   max-height: 24rem;
   overflow-y: auto;
   overscroll-behavior: contain;
-  padding: var(--fade-top) var(--scroller-gutter) var(--fade-bottom);
+  padding: 0.75rem var(--scroller-gutter) var(--fade-bottom);
   position: relative;
 }
 
