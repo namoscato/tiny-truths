@@ -1,10 +1,12 @@
 .root {
   --cue-active-color: color-mix(in srgb, var(--color-green) 30%, transparent);
-  --cue-padding: 0.3em;
+  --cue-padding: 0.2em;
   /* room for the highlight so the scroller doesn't clip it */
   --scroller-gutter: 0.75rem;
 
   margin: 1.5rem 0 1rem;
+  /* match the text column and footer so their edges and dividers line up */
+  max-width: var(--max-width-small);
 }
 
 .summary {
@@ -37,17 +39,17 @@
 }
 
 .scroller {
-  /* top and bottom rules, inset to line up with the text rather than the gutter */
-  background:
-    linear-gradient(var(--color-gray-light), var(--color-gray-light)) top /
-      calc(100% - 2 * var(--scroller-gutter)) 1px no-repeat,
-    linear-gradient(var(--color-gray-light), var(--color-gray-light)) bottom /
-      calc(100% - 2 * var(--scroller-gutter)) 1px no-repeat;
+  /* top rule, inset to line up with the text rather than the gutter; the
+     footer's rule closes the transcript at the bottom */
+  background: linear-gradient(var(--color-gray-light), var(--color-gray-light))
+    top / calc(100% - 2 * var(--scroller-gutter)) 1px no-repeat;
+  /* fade out lines cut off at the bottom of the scroller */
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 2rem), transparent);
   margin: 0.75rem calc(-1 * var(--scroller-gutter)) 0;
   max-height: 22rem;
   overflow-y: auto;
   overscroll-behavior: contain;
-  padding: 0.75rem var(--scroller-gutter);
+  padding: 0.75rem var(--scroller-gutter) 2rem;
   position: relative;
 }
 
@@ -73,7 +75,7 @@
 .cue {
   background: none;
   border: 0;
-  border-radius: 0.5em;
+  border-radius: 4px; /* matches the play button */
   color: inherit;
   cursor: pointer;
   display: inline;
@@ -107,7 +109,7 @@
 .cueActive {
   animation: cue-activate 400ms ease-out;
   background-color: var(--cue-active-color);
-  box-shadow: 0 0 0 0.15em var(--cue-active-color);
+  box-shadow: 0 0 0 0.1em var(--cue-active-color);
   color: var(--color-black);
 }
 
@@ -115,7 +117,7 @@
    surrounding text doesn't reflow. */
 @keyframes cue-activate {
   from {
-    box-shadow: 0 0 0 0.4em var(--cue-active-color);
+    box-shadow: 0 0 0 0.3em var(--cue-active-color);
   }
 }
 
